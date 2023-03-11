@@ -5,15 +5,22 @@ import App from "./App";
 function LogIn() {
         async function handleClick() {
             const authClient = await AuthClient.create();
+
             if (await authClient.isAuthenticated()){
-                console.log("logged in");
-            }
-            await authClient.login({
+                alert("You are already logged in");
+            } else {
+              await authClient.login({
                 identityProvider: "https://identity.ic0.app",
                 onSuccess: () => {
-             ReactDOM.render(<App />, document.getElementById("root"));
+               handelAuthenitcation(authClient);
               }
         });
+            }
+            async function handelAuthenitcation(authClient){
+              ReactDOM.render(<App />, document.getElementById("root"));
+            }
+
+            
         }
   return (
     <p className="trade-buttons">
